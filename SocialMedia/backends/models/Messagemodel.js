@@ -1,0 +1,18 @@
+import mongoose from "mongoose";
+
+const messageSchema = new mongoose.Schema(
+  {
+    conversationId: { type: mongoose.Schema.Types.ObjectId, ref: "Conversation" },
+    senderId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    receiverId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    text: { type: String, required: true },
+    read: { type: Boolean, default: false },
+    
+  deletedFor: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+  ],
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model("Message", messageSchema);
